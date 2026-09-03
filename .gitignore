@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.local
+*.log
+npm-debug.log*
+
+# Print Bridge
+print-bridge/node_modules/
+print-bridge/.env
