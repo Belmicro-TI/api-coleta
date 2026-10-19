@@ -13,10 +13,14 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
   : ['http://localhost:3000', 'http://localhost:8081'];
 
+const allowedPatterns = [/^https:\/\/[^.]+\.apps\.zdusercontent\.com$/];
+
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else if (allowedPatterns.some((re) => re.test(origin))) {
         callback(null, true);
       } else {
         callback(new Error(`Origem não permitida: ${origin}`));
