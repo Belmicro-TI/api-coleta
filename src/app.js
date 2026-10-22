@@ -32,6 +32,10 @@ app.use(
 
 app.use(helmet());
 app.use(express.json({ limit: '5mb' }));
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
 
 app.use('/sankhya', sankhyaRoutes);
 app.use('/auth', authRoutes);
